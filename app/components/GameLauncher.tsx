@@ -15,10 +15,12 @@ export default function GameLauncher({
 
   // lock background scroll while open
   useEffect(() => {
-    if (!open) return;
+    if (!open) return undefined;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    return () => (document.body.style.overflow = prev);
+    return () => {
+      document.body.style.overflow = prev;
+    };
   }, [open]);
 
   // close on ESC
