@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { Facebook, Instagram, Twitter } from "lucide-react";
 
@@ -11,10 +12,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Brand / left */}
           <div className="md:col-span-5">
-            {/* White logo */}
-            <a href="/" className="inline-block" aria-label="The Wouff — Home">
+            {/* White logo (put file at /public/brand/wouff-logo-white.png) */}
+            <Link href="/" aria-label="The Wouff — Home" className="inline-block">
               <Image
-                src="/brand/wouff-white.png" // put file in /public/brand/
+                src="/brand/wouff-logo-white.png"
                 alt="The Wouff"
                 width={520}
                 height={100}
@@ -22,7 +23,7 @@ export default function Footer() {
                 className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain"
                 sizes="(min-width: 1024px) 520px, (min-width: 640px) 360px, 240px"
               />
-            </a>
+            </Link>
 
             <p className="mt-6 text-gray-300 leading-relaxed mb-6 max-w-md">
               Your trusted partner in pet care. We provide comprehensive products
@@ -30,6 +31,7 @@ export default function Footer() {
             </p>
 
             <div className="flex gap-4">
+              {/* Socials keep anchors since they’re external/# links */}
               <a
                 aria-label="Facebook"
                 className="grid h-10 w-10 place-items-center rounded-full bg-gray-700 hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
@@ -153,21 +155,21 @@ export default function Footer() {
         </div>
 
         {/* Divider & bottom bar */}
-        <div className="mt-10 border-top border-t border-white/10 pt-6">
+        <div className="mt-10 border-t border-white/10 pt-6">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <div className="flex flex-wrap justify-center gap-x-6 text-sm text-gray-300">
-              <a href="/privacy" className="hover:text-white transition-colors">
+              <Link href="/privacy" className="hover:text-white transition-colors">
                 Privacy Policy
-              </a>
-              <a href="/terms" className="hover:text-white transition-colors">
+              </Link>
+              <Link href="/terms" className="hover:text-white transition-colors">
                 Terms of Service
-              </a>
-              <a href="/404" className="hover:text-white transition-colors">
+              </Link>
+              <Link href="/404" className="hover:text-white transition-colors">
                 404
-              </a>
-              <a href="/password" className="hover:text-white transition-colors">
+              </Link>
+              <Link href="/password" className="hover:text-white transition-colors">
                 Password
-              </a>
+              </Link>
             </div>
 
             <div className="text-center md:text-right text-sm text-gray-300">
