@@ -15,7 +15,7 @@ export default function Footer() {
             {/* White logo (put file at /public/brand/wouff-logo-white.png) */}
             <Link href="/" aria-label="The Wouff — Home" className="inline-block">
               <Image
-                src="/brand/wouff-logo-white.png"
+                src="/brand/wouff-white.png"
                 alt="The Wouff"
                 width={520}
                 height={100}
