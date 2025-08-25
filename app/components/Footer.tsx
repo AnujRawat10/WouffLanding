@@ -11,11 +11,24 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Brand / left */}
           <div className="md:col-span-5">
-            <h2 className="text-3xl font-bold lowercase mb-4">wouff</h2>
-            <p className="text-gray-300 leading-relaxed mb-6 max-w-md">
+            {/* White logo */}
+            <a href="/" className="inline-block" aria-label="The Wouff — Home">
+              <Image
+                src="/brand/wouff-white.png" // put file in /public/brand/
+                alt="The Wouff"
+                width={520}
+                height={100}
+                priority
+                className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto object-contain"
+                sizes="(min-width: 1024px) 520px, (min-width: 640px) 360px, 240px"
+              />
+            </a>
+
+            <p className="mt-6 text-gray-300 leading-relaxed mb-6 max-w-md">
               Your trusted partner in pet care. We provide comprehensive products
               delivered with love for your furry family members.
             </p>
+
             <div className="flex gap-4">
               <a
                 aria-label="Facebook"
@@ -73,7 +86,7 @@ export default function Footer() {
                 {/* Cat image: anchored bottom-right */}
                 <div className="pointer-events-none absolute right-4 bottom-4 sm:right-6 sm:bottom-6 h-28 w-28 sm:h-40 sm:w-40 rounded-[22px] overflow-hidden">
                   <Image
-                    src="/footer/cat.png" // <-- put your file in public/footer/cat.jpg or change the path
+                    src="/footer/cat.png" // place file in /public/footer/
                     alt="cat waving"
                     fill
                     className="object-cover"
