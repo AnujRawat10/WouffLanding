@@ -23,17 +23,14 @@ export default function TestimonialsSection() {
     [],
   );
 
-  // Theme
   const SECTION_BG = "#e0ce8a";
   const QUOTE_TINT = "#d4b253";
 
-  // Refs & state
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(0);
   const [isHover, setIsHover] = useState(false);
 
-  // Center the active card by translating the track
   const centerActive = () => {
     const viewport = viewportRef.current;
     const track = trackRef.current;
@@ -48,8 +45,7 @@ export default function TestimonialsSection() {
   };
 
   useEffect(() => {
-    centerActive(); // on mount and whenever index changes
-    // also recenter on resize/orientation changes
+    centerActive();
     const ro = new ResizeObserver(() => centerActive());
     viewportRef.current && ro.observe(viewportRef.current);
     window.addEventListener("resize", centerActive);
@@ -62,7 +58,6 @@ export default function TestimonialsSection() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
 
-  // Buttons & keyboard
   const goPrev = () => setActive((i) => (i - 1 + testimonials.length) % testimonials.length);
   const goNext = () => setActive((i) => (i + 1) % testimonials.length);
 
@@ -75,34 +70,41 @@ export default function TestimonialsSection() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // Auto-advance (pause on hover)
   useEffect(() => {
     if (isHover) return;
-    const id = setInterval(() => goNext(), 4000);
+    const id = setInterval(() => goNext(), 4500);
     return () => clearInterval(id);
-  }, [isHover, active]); // restart timer after manual navigation
+  }, [isHover, active]);
 
   return (
-    <section 
-    id='testimonials'
-    className="relative py-16 md:py-20 lg:py-24" style={{ backgroundColor: SECTION_BG }} aria-label="Testimonials">
+    <section
+      id="testimonials"
+      className="relative py-12 md:py-14 lg:py-16"
+      style={{ backgroundColor: SECTION_BG }}
+      aria-label="Testimonials"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header — scaled down to fit in one screen with cards */}
-        <div className="mb-10 md:mb-12 max-w-3xl">
-          <h2 className="lowercase font-semibold tracking-tight text-gray-900 leading-[1.05]
-                         text-[40px] sm:text-[52px] md:text-[64px] lg:text-[72px]">
+        {/* Header — compact and screen-friendly */}
+        <div className="mb-8 md:mb-10 max-w-3xl">
+          <h2
+            className="
+              lowercase font-semibold tracking-tight text-gray-900 leading-tight
+              text-[clamp(28px,6.2vw,56px)]
+            "
+          >
             trusted by humans, loved by pets
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-gray-900/80">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.
-            Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.
+          <p className="mt-3 text-[clamp(14px,2.2vw,18px)] text-gray-900/80">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros
+            elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut
+            commodo diam libero vitae erat.
           </p>
         </div>
 
-        {/* Viewport (no scrollbar) */}
+        {/* Viewport — add bottom padding so arrows never get clipped */}
         <div
           ref={viewportRef}
-          className="relative overflow-hidden"
+          className="relative overflow-hidden pb-16" // <- space for buttons
           onMouseEnter={() => setIsHover(true)}
           onMouseLeave={() => setIsHover(false)}
         >
@@ -121,15 +123,15 @@ export default function TestimonialsSection() {
                   key={t.id}
                   className={[
                     "t-slide shrink-0",
-                    // widths: shows a peek of side cards but keeps everything within one screen
-                    "w-[86vw] sm:w-[65vw] md:w-[48vw] lg:w-[38vw] xl:w-[34vw]",
+                    // Slightly narrower widths so 2–3 cards + peeks fit without forcing tall heights
+                    "w-[86vw] sm:w-[62vw] md:w-[48vw] lg:w-[40vw] xl:w-[36vw]",
                     "transition-all duration-500",
-                    isActive ? "opacity-100 scale-[1.0]" : "opacity-45 scale-[0.97]",
+                    isActive ? "opacity-100 scale-[1.0]" : "opacity-55 scale-[0.98]",
                   ].join(" ")}
                 >
-                  <article className="rounded-3xl bg-[rgba(255,255,255,0.9)] p-6 sm:p-7 md:p-8 shadow-[0_12px_30px_rgba(0,0,0,0.08)]">
+                  <article className="rounded-3xl bg-white/90 p-5 sm:p-6 md:p-7 shadow-[0_10px_28px_rgba(0,0,0,0.08)]">
                     {/* Stars */}
-                    <div className="mb-4 flex">
+                    <div className="mb-3 flex">
                       {Array.from({ length: t.rating }).map((_, s) => (
                         <Star key={s} className="mr-1 h-5 w-5 text-yellow-400 fill-current" />
                       ))}
@@ -137,24 +139,24 @@ export default function TestimonialsSection() {
 
                     {/* Quote */}
                     <blockquote
-                      className="mb-6 leading-snug"
-                      style={{ color: QUOTE_TINT, fontSize: "clamp(18px, 2.6vw, 28px)", fontWeight: 600 }}
+                      className="mb-5 leading-snug"
+                      style={{ color: QUOTE_TINT, fontSize: "clamp(16px,2.1vw,22px)", fontWeight: 600 }}
                     >
                       “{t.quote}”
                     </blockquote>
 
                     {/* Author */}
-                    <div className="mt-6 flex items-center">
-                      <div className="mr-4 flex h-11 w-11 items-center justify-center rounded-full bg-white shadow">
+                    <div className="mt-5 flex items-center">
+                      <div className="mr-4 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow">
                         {t.avatarUrl ? (
-                          <img src={t.avatarUrl} alt={t.name} className="h-11 w-11 rounded-full object-cover" />
+                          <img src={t.avatarUrl} alt={t.name} className="h-10 w-10 rounded-full object-cover" />
                         ) : (
-                          <User className="h-6 w-6 text-gray-600" />
+                          <User className="h-5 w-5 text-gray-600" />
                         )}
                       </div>
                       <div className="text-gray-900">
-                        <p className="font-semibold">{t.name}</p>
-                        <p className="text-sm text-gray-600">Pet Parent</p>
+                        <p className="font-semibold text-[15px]">{t.name}</p>
+                        <p className="text-xs text-gray-600">Pet Parent</p>
                       </div>
                     </div>
                   </article>
@@ -163,18 +165,18 @@ export default function TestimonialsSection() {
             })}
           </div>
 
-          {/* Nav arrows — bottom-left like the ref */}
-          <div className="absolute -bottom-2 left-2 z-10 flex gap-4">
+          {/* Nav arrows — placed safely inside the viewport */}
+          <div className="absolute bottom-4 left-4 z-10 flex gap-3">
             <button
               onClick={goPrev}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-[rgba(255,255,255,0.9)] text-gray-900 shadow hover:bg-white transition"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-gray-900 shadow hover:bg-white transition"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
             <button
               onClick={goNext}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-[rgba(255,255,255,0.9)] text-gray-900 shadow hover:bg-white transition"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-gray-900 shadow hover:bg-white transition"
               aria-label="Next testimonial"
             >
               <ChevronRight className="h-5 w-5" />

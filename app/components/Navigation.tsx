@@ -44,10 +44,10 @@ export default function Navigation({ currentBgColor }: NavigationProps) {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               <a
-                href="#services"
+                href="#collections"
                 className={`${textColor} ${hoverColor} transition-colors px-3 py-2 text-sm font-medium lowercase`}
               >
-                services
+                Collections
               </a>
               <a
                 href="#testimonials"
@@ -83,7 +83,7 @@ export default function Navigation({ currentBgColor }: NavigationProps) {
                   : "text-white hover:text-gray-100"
               }`}
             >
-              book now
+              shop now
             </button>
           </div>
 
@@ -151,7 +151,7 @@ export default function Navigation({ currentBgColor }: NavigationProps) {
                   : "text-white hover:text-gray-100"
               }`}
             >
-              book now
+              shop now
             </button>
           </div>
         </div>

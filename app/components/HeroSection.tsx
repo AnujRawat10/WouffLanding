@@ -13,10 +13,10 @@ const STEP_MS = 3000; // one clock for text + images
 export default function HeroSection({ onBgColorChange }: HeroSectionProps) {
   const heroBackgrounds = useMemo(
     () => [
-      { bgColor: "#e0ce8a", image: "/dogs/d1.avif", alt: "Golden retriever", heading: "furvourite" },
-      { bgColor: "#9acbda", image: "/dogs/d2.avif", alt: "Playful husky", heading: "meowelous" },
-      { bgColor: "#e3b3c3", image: "/dogs/d3.avif", alt: "Cute cat", heading: "purrfect" },
-      { bgColor: "#98cbbc", image: "/dogs/d4.avif", alt: "Tuxedo cat", heading: "pawsome" },
+      { bgColor: "#e0ce8a", image: "/dogs/1.svg", alt: "Golden retriever", heading: "furvourite" },
+      { bgColor: "#9acbda", image: "/dogs/2.svg", alt: "Playful husky", heading: "meowelous" },
+      { bgColor: "#e3b3c3", image: "/dogs/3.svg", alt: "Cute cat", heading: "purrfect" },
+      { bgColor: "#98cbbc", image: "/dogs/4.svg", alt: "Tuxedo cat", heading: "pawsome" },
     ],
     []
   );
@@ -90,10 +90,10 @@ export default function HeroSection({ onBgColorChange }: HeroSectionProps) {
               <a
                 href="#book"
                 className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-transparent px-6 py-2 text-sm font-semibold text-white shadow-[0_2px_0_rgba(0,0,0,0.08)] backdrop-blur-sm transition-all hover:bg-white/10"
-                aria-label="Book now"
+                aria-label="Shop now"
               >
                 <PawPrint className="h-4 w-4" />
-                Book now
+                Shop Now
               </a>
             </div>
           </div>

@@ -6,6 +6,7 @@ import HeroSection from "./components/HeroSection"
 import HowItWorksSection from "./components/HowItWorksSection";
 import GameLauncher from "@/app/components/GameLauncher";
 import ServicesSection from "./components/ServicesSection"
+import ProductsForPets from "./components/ProductsForPets";
 import TestimonialsSection from "./components/TestimonialsSection"
 import FAQSection from "./components/FAQSection"
 import ContactSection from "./components/ContactSection"
@@ -30,22 +31,39 @@ export default function Home() {
         ]}
       />
 
-      <ServicesSection />
-      <a
+      <ServicesSection/>
+      {/* <a
   href="https://tap-game-for-wouff.vercel.app/"
   target="_blank"
   rel="noopener noreferrer"
   className={`transition-colors px-3 py-2 text-sm font-medium lowercase`}
 >
   play
-</a>
+</a> */}
+<ProductsForPets
+        products={[
+          { id: 1, name: "Kyroi – Shampoo", price: 20, currency: "USD", type: "Physical", image: "/ProductsForPets/p1.jpg", href: "/product/kyroi-1" },
+          { id: 2, name: "Moly Moly – Shampoo", price: 20, currency: "USD", type: "Physical", image: "/ProductsForPets/p2.jpg", href: "/product/moly-1" },
+        ]}
+        viewAllHref="/shop"
+        onAddToCart={(p) => console.log("Add to cart:", p)}
+      />
 
 
       <TestimonialsSection />
 
       <FAQSection />
 
-      <ContactSection />
+      <ContactSection
+        heroImage="/contact/hero.jpg"
+        badgeImage="/contact/badge.jpg"
+        // Optional overrides:
+        // eyebrow="Vertic pet solutions"
+        // highlight="wellness"
+        // panelBg="#cfe8f6"
+        // primaryHref="mailto:hello@wouff.com"
+        // secondaryHref="#services"
+      />
 
       <Footer />
     </div>

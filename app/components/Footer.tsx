@@ -1,109 +1,172 @@
-import { Facebook, Instagram, Twitter, Phone, Mail, MapPin } from "lucide-react"
+"use client";
+
+import Image from "next/image";
+import { Facebook, Instagram, Twitter } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Logo & Description */}
-          <div className="md:col-span-2">
-            <h2 className="text-3xl font-bold lowercase mb-4">furs</h2>
+    <footer className="bg-gray-900 text-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+        {/* Top grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+          {/* Brand / left */}
+          <div className="md:col-span-5">
+            <h2 className="text-3xl font-bold lowercase mb-4">wouff</h2>
             <p className="text-gray-300 leading-relaxed mb-6 max-w-md">
-              Your trusted partner in pet care. We provide comprehensive services delivered with love for your furry
-              family members.
+              Your trusted partner in pet care. We provide comprehensive products
+              delivered with love for your furry family members.
             </p>
-            <div className="flex space-x-4">
-              <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-600 transition-colors cursor-pointer">
-                <Facebook className="w-5 h-5" />
-              </div>
-              <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-600 transition-colors cursor-pointer">
-                <Instagram className="w-5 h-5" />
-              </div>
-              <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-600 transition-colors cursor-pointer">
-                <Twitter className="w-5 h-5" />
-              </div>
+            <div className="flex gap-4">
+              <a
+                aria-label="Facebook"
+                className="grid h-10 w-10 place-items-center rounded-full bg-gray-700 hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
+                href="#"
+              >
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a
+                aria-label="Instagram"
+                className="grid h-10 w-10 place-items-center rounded-full bg-gray-700 hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
+                href="#"
+              >
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a
+                aria-label="Twitter"
+                className="grid h-10 w-10 place-items-center rounded-full bg-gray-700 hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
+                href="#"
+              >
+                <Twitter className="h-5 w-5" />
+              </a>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4 lowercase">quick links</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#services" className="text-gray-300 hover:text-white transition-colors lowercase">
-                  services
-                </a>
-              </li>
-              <li>
-                <a href="#about" className="text-gray-300 hover:text-white transition-colors lowercase">
-                  about us
-                </a>
-              </li>
-              <li>
-                <a href="#blogs" className="text-gray-300 hover:text-white transition-colors lowercase">
-                  blog
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="text-gray-300 hover:text-white transition-colors lowercase">
-                  contact
-                </a>
-              </li>
-            </ul>
-          </div>
+          {/* CTA tiles right */}
+          <div className="md:col-span-7">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-stretch">
+              {/* Get in touch */}
+              <div
+                className="relative overflow-hidden rounded-[28px] p-6 sm:p-8 ring-1 ring-white/10"
+                style={{ backgroundColor: "#e7b7c3" }} // soft pink
+              >
+                <div className="flex h-full min-h-[340px] sm:min-h-[380px] flex-col justify-between">
+                  <div className="max-w-[26ch] pr-24 sm:pr-32">
+                    <h3 className="text-white/95 text-[34px] leading-none sm:text-[38px] font-semibold lowercase">
+                      get in <br /> touch
+                    </h3>
+                    <p className="mt-3 text-white/90 text-sm leading-relaxed">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Curabitur pulvinar magna nec orci ultricies vulputate.
+                    </p>
+                  </div>
 
-          {/* Contact Info */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4 lowercase">contact info</h3>
-            <div className="space-y-2 text-gray-300">
-              <p className="flex items-center">
-                <Phone className="w-4 h-4 mr-2" />
-                (555) 123-4567
-              </p>
-              <p className="flex items-center">
-                <Mail className="w-4 h-4 mr-2" />
-                hello@Wouff.com
-              </p>
-              <p className="flex items-center">
-                <MapPin className="w-4 h-4 mr-2" />
-                123 Pet Street, Animal City
-              </p>
+                  <div className="mt-5">
+                    <a
+                      href="#contact"
+                      className="inline-flex items-center rounded-full border border-white/70 bg-white/10 px-5 py-2 text-sm font-medium text-white backdrop-blur transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/60"
+                    >
+                      Contact us
+                    </a>
+                  </div>
+                </div>
+
+                {/* Cat image: anchored bottom-right */}
+                <div className="pointer-events-none absolute right-4 bottom-4 sm:right-6 sm:bottom-6 h-28 w-28 sm:h-40 sm:w-40 rounded-[22px] overflow-hidden">
+                  <Image
+                    src="/footer/cat.png" // <-- put your file in public/footer/cat.jpg or change the path
+                    alt="cat waving"
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 640px) 160px, 112px"
+                    priority
+                  />
+                </div>
+              </div>
+
+              {/* Join the pack */}
+              <div
+                className="rounded-[28px] p-6 sm:p-8 ring-1 ring-white/10"
+                style={{ backgroundColor: "#a8d3e1" }} // light blue
+              >
+                <div className="flex h-full min-h-[340px] sm:min-h-[380px] flex-col justify-between">
+                  <div className="max-w-[28ch]">
+                    <h3 className="text-white/95 text-[34px] leading-none sm:text-[38px] font-semibold lowercase">
+                      join the <br /> pack
+                    </h3>
+                    <p className="mt-3 text-white/90 text-sm leading-relaxed">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Curabitur pulvinar magna nec ultricies vulputate.
+                    </p>
+                  </div>
+
+                  {/* Email pill with right circular button */}
+                  <form
+                    className="mt-5"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      // TODO: hook your subscribe logic
+                    }}
+                  >
+                    <label htmlFor="pack-email" className="sr-only">
+                      Email address
+                    </label>
+
+                    <div className="relative">
+                      {/* pill */}
+                      <div className="flex items-center rounded-full bg-white/95 p-1.5 pr-20 ring-1 ring-black/10">
+                        <input
+                          id="pack-email"
+                          type="email"
+                          required
+                          placeholder="Enter your email…"
+                          className="w-full bg-transparent px-4 py-2 text-sm text-gray-900 placeholder-gray-500 outline-none"
+                        />
+                      </div>
+
+                      {/* circular button */}
+                      <button
+                        type="submit"
+                        className="absolute right-1.5 top-1/2 -translate-y-1/2 grid h-11 w-11 place-items-center rounded-full bg-[#56a6bf] text-white text-[11px] font-semibold leading-tight hover:opacity-90 transition focus:outline-none focus:ring-2 focus:ring-white/70"
+                        aria-label="Join the pack"
+                      >
+                        Join
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-gray-700 pt-8">
-          {/* Bottom Footer */}
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            {/* Legal Links */}
-            <div className="flex flex-wrap justify-center md:justify-start space-x-6 text-sm">
-              <a href="/privacy" className="text-gray-300 hover:text-white transition-colors">
+        {/* Divider & bottom bar */}
+        <div className="mt-10 border-top border-t border-white/10 pt-6">
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+            <div className="flex flex-wrap justify-center gap-x-6 text-sm text-gray-300">
+              <a href="/privacy" className="hover:text-white transition-colors">
                 Privacy Policy
               </a>
-              <a href="/terms" className="text-gray-300 hover:text-white transition-colors">
+              <a href="/terms" className="hover:text-white transition-colors">
                 Terms of Service
               </a>
-              <a href="/404" className="text-gray-300 hover:text-white transition-colors">
+              <a href="/404" className="hover:text-white transition-colors">
                 404
               </a>
-              <a href="/password" className="text-gray-300 hover:text-white transition-colors">
+              <a href="/password" className="hover:text-white transition-colors">
                 Password
               </a>
             </div>
 
-            {/* Copyright */}
             <div className="text-center md:text-right text-sm text-gray-300">
-              <p className="mb-1">© 2025 Company name. All rights reserved.</p>
+              <p>© 2025 Company name. All rights reserved.</p>
               <p className="text-xs">
-                Created by <span className="text-white">Flouix</span> • Powered by{" "}
-                <span className="text-white">Webflow</span>
+                Created by <span className="text-white">Anuj</span> • Powered by{" "}
+                <span className="text-white">DDC</span>
               </p>
             </div>
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }

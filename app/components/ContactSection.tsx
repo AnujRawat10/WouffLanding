@@ -1,223 +1,125 @@
 "use client";
 
-import type React from "react";
-import { useState } from "react";
 import Image from "next/image";
-import { Mail, Phone, MessageSquare } from "lucide-react";
+import { PawPrint, ChevronRight } from "lucide-react";
 
 type Props = {
-  imageSrc?: string;            // e.g. "/contact/hero.jpg"
-  email?: string;               // e.g. "info@pawhaven.com"
-  phone?: string;               // e.g. "+1 (555) 123-4567"
+  eyebrow?: string;
+  heading?: string;
+  highlight?: string;
+  subcopy?: string;
+  heroImage: string;
+  heroAlt?: string;
+  badgeImage: string;
+  badgeAlt?: string;
+  panelBg?: string;
+  primaryHref?: string;
+  secondaryHref?: string;
 };
 
-export default function ContactSection({
-  imageSrc = "/contact/hero.jpg",
-  email = "info@pawhaven.com",
-  phone = "+1 (555) 123-4567",
+export default function ContactHero({
+  eyebrow = "Wouff pet solutions",
+  heading = "Your reliable partner for pet wellness",
+  highlight = "wellness",
+  subcopy = "At our clinic, we prioritize the health and happiness of your beloved pets. Our expert veterinarians are dedicated to providing love.",
+  heroImage,
+  heroAlt = "Happy pet and human",
+  badgeImage,
+  badgeAlt = "Cute pet",
+  panelBg = "#cfe8f6",
+  primaryHref = "#contact",
+  secondaryHref = "#services",
 }: Props) {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    service: "",
-    message: "",
-  });
-  const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">("idle");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Simulate async submit
-    setTimeout(() => {
-      if (formData.name.trim() && formData.email.trim()) {
-        setFormStatus("success");
-        setFormData({ name: "", email: "", phone: "", service: "", message: "" });
-      } else {
-        setFormStatus("error");
-      }
-    }, 700);
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
-  ) => {
-    setFormData((s) => ({ ...s, [e.target.name]: e.target.value }));
-    setFormStatus("idle");
-  };
+  const parts = heading.split(new RegExp(`(${escapeRegExp(highlight)})`, "i"));
 
   return (
-    <section id="contact" className="py-16 sm:py-20 lg:py-24 bg-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-14">
+    <section id="contact" className="bg-[#f4f4f4]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* LEFT */}
-          <div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-gray-900">
-              Contact Us
-            </h2>
-            <p className="mt-5 text-gray-700 leading-relaxed text-base sm:text-lg">
-              For owners seeking regular, ongoing care, the Comprehensive Care Plan offers an excellent
-              balance of essential and additional services.
-            </p>
-
-            {/* tiles */}
-            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <a
-                href={`mailto:${email}`}
-                className="flex items-center justify-center gap-3 rounded-3xl bg-amber-50 px-6 py-6 ring-1 ring-amber-100"
-              >
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-gray-900 ring-1 ring-black/5">
-                  <MessageSquare className="h-5 w-5" />
-                </span>
-                <span className="text-gray-900 font-medium">{email}</span>
-              </a>
-              <a
-                href={`tel:${phone.replace(/[^\d+]/g, "")}`}
-                className="flex items-center justify-center gap-3 rounded-3xl bg-amber-50 px-6 py-6 ring-1 ring-amber-100"
-              >
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-gray-900 ring-1 ring-black/5">
-                  <Phone className="h-5 w-5" />
-                </span>
-                <span className="text-gray-900 font-medium">{phone}</span>
-              </a>
+          <div className="lg:col-span-5">
+            <div className="flex items-center gap-2 text-sm font-medium text-gray-800">
+              <span className="inline-block h-2 w-2 rounded-full bg-[#ff5a3c]" />
+              <span>{eyebrow}</span>
             </div>
 
-            {/* image card */}
-            <div className="mt-6 overflow-hidden rounded-3xl ring-1 ring-amber-100 bg-amber-50">
-              <div className="relative aspect-[16/9] w-full">
-                <Image
-                  src={imageSrc}
-                  alt="Smiling customer with pet"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
+            <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight text-gray-900">
+              {parts.map((seg, i) =>
+                seg.toLowerCase() === highlight.toLowerCase() ? (
+                  <span key={i} className="relative inline-block">
+                    <span className="relative z-10">{seg}</span>
+                    <span className="absolute left-0 bottom-1 h-3 w-full rounded-full bg-fuchsia-300/70 -z-0" />
+                  </span>
+                ) : (
+                  <span key={i}> {seg} </span>
+                ),
+              )}
+            </h1>
+
+            <p className="mt-5 max-w-xl text-gray-600">{subcopy}</p>
+
+            <div className="mt-7 flex flex-wrap items-center gap-4">
+              <a
+                href={primaryHref}
+                className="group inline-flex items-center rounded-full bg-gray-900 text-white pl-5 pr-2 py-2.5 text-sm font-semibold shadow hover:shadow-md transition"
+              >
+                Contact us
+                <span className="ml-3 grid h-9 w-9 place-items-center rounded-full bg-[#f4a3ff] text-gray-900 shadow-inner">
+                  <PawPrint className="h-5 w-5" />
+                </span>
+              </a>
+
+              <a
+                href={secondaryHref}
+                className="inline-flex items-center text-gray-900 font-medium hover:opacity-80 transition"
+              >
+                See all services
+                <ChevronRight className="ml-1.5 h-4 w-4" />
+              </a>
             </div>
           </div>
 
           {/* RIGHT */}
-          <div className="rounded-[28px] bg-white p-6 sm:p-8 lg:p-10 shadow-xl ring-1 ring-black/5">
-            <h3 className="text-2xl md:text-3xl font-semibold text-gray-900">Lets Get In Touch</h3>
-            <p className="mt-2 text-gray-700">
-              Fill out the form below, and we’ll call you within 24 hours.
-            </p>
-
-            <form onSubmit={handleSubmit} className="mt-6 space-y-5">
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                {/* Full Name */}
-                <div>
-                  <label htmlFor="name" className="mb-2 block text-sm font-medium text-gray-800">
-                    Full Name
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    placeholder="Full Name"
-                    className="w-full rounded-2xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-700/30"
-                    type="text"
-                  />
-                </div>
-
-                {/* Email */}
-                <div>
-                  <label htmlFor="email" className="mb-2 block text-sm font-medium text-gray-800">
-                    Email Address
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    placeholder="Email Address"
-                    className="w-full rounded-2xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-700/30"
-                    type="email"
-                  />
-                </div>
-
-                {/* Services */}
-                <div>
-                  <label htmlFor="service" className="mb-2 block text-sm font-medium text-gray-800">
-                    Services
-                  </label>
-                  <div className="relative">
-                    <select
-                      id="service"
-                      name="service"
-                      value={formData.service}
-                      onChange={handleChange}
-                      className="w-full appearance-none rounded-2xl border border-gray-300 px-4 py-3 pr-10 text-gray-900 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-700/30"
-                    >
-                      <option value="">Choose Your Services</option>
-                      <option value="boarding">Boarding</option>
-                      <option value="grooming">Grooming</option>
-                      <option value="retail">Retail</option>
-                      <option value="training">Training</option>
-                      <option value="transport">Transport</option>
-                    </select>
-                    <Mail className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                  </div>
-                </div>
-
-                {/* Phone */}
-                <div>
-                  <label htmlFor="phone" className="mb-2 block text-sm font-medium text-gray-800">
-                    Phone
-                  </label>
-                  <input
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="Phone"
-                    className="w-full rounded-2xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-700/30"
-                    type="tel"
-                  />
-                </div>
-              </div>
-
-              {/* Message */}
-              <div>
-                <label htmlFor="message" className="mb-2 block text-sm font-medium text-gray-800">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows={4}
-                  placeholder="Write Your Message"
-                  className="w-full resize-none rounded-2xl border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-700/30"
+          <div className="lg:col-span-7">
+            {/* ⬇️ removed overflow-hidden here so the badge can hang outside without getting cut */}
+            <div
+              className="relative rounded-[32px] p-3 sm:p-4"
+              style={{ backgroundColor: panelBg }}
+            >
+              {/* Big image (keeps overflow-hidden to respect rounding) */}
+              <div className="relative w-full aspect-[4/5] sm:aspect-[16/10] lg:aspect-[16/9] rounded-[28px] overflow-hidden">
+                <Image
+                  src={heroImage}
+                  alt={heroAlt}
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 58vw, 92vw"
                 />
               </div>
 
-              {/* Submit */}
-              <button
-                type="submit"
-                className="mt-1 inline-flex items-center justify-center rounded-full bg-amber-400 px-7 py-3 text-[15px] font-semibold text-gray-900 shadow-md transition hover:bg-amber-500"
-              >
-                Submit Your Request
-              </button>
-
-              {/* Status */}
-              {formStatus === "success" && (
-                <p className="rounded-xl border border-green-200 bg-green-50 p-3 text-green-700">
-                  Thanks! We’ve received your request and will reach out within 24 hours.
-                </p>
-              )}
-              {formStatus === "error" && (
-                <p className="rounded-xl border border-red-200 bg-red-50 p-3 text-red-700">
-                  Please fill in your name and email, then try again.
-                </p>
-              )}
-            </form>
+              {/* Floating badge — z-20 to be sure it’s above the big photo */}
+              <div className="absolute -top-6 left-6 sm:-top-7 sm:left-7 z-20">
+                <div className="relative h-24 w-24 sm:h-28 sm:w-28 rounded-[20px] border-[6px] border-white shadow-xl overflow-hidden bg-white">
+                  <Image
+                    src={badgeImage}
+                    alt={badgeAlt}
+                    fill
+                    className="object-cover"
+                    sizes="112px"
+                    priority={false}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
+          {/* /RIGHT */}
         </div>
       </div>
     </section>
   );
+}
+
+function escapeRegExp(str: string) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }

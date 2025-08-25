@@ -212,3 +212,23 @@ textarea {
   animation-timing-function: ease-in-out;
   animation-fill-mode: both;
 }
+/* Hide horizontal scrollbar but keep scrolling */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;             /* Chrome/Safari */
+}
+
+/* === sticker animations (scoped by class names) === */
+@keyframes sticker-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+@keyframes sticker-bob {
+  0%, 100% { transform: rotate(12deg) translateY(0); }
+  50%      { transform: rotate(14deg) translateY(-4px); }
+}
+.sticker-float { animation: sticker-float 5s ease-in-out infinite; }
+.sticker-bob   { animation: sticker-bob   6s ease-in-out infinite; }
