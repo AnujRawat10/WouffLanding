@@ -8,6 +8,7 @@ import GameLauncher from "@/app/components/GameLauncher";
 import ServicesSection from "./components/ServicesSection"
 import ProductsForPets from "./components/ProductsForPets";
 import TestimonialsSection from "./components/TestimonialsSection"
+import BeforeAfter from "@/app/components/BeforeAfter";
 import FAQSection from "./components/FAQSection"
 import ContactSection from "./components/ContactSection"
 import Footer from "./components/Footer"
@@ -51,6 +52,15 @@ export default function Home() {
 
 
       <TestimonialsSection />
+      {/* <BeforeAfter />
+
+// or custom images
+<BeforeAfter
+  beforeSrc="/beforeafter/dog-before.jpg"
+  afterSrc="/beforeafter/dog-after.jpg"
+  labelBefore="Before"
+  labelAfter="After"
+/> */}
 
       <FAQSection />
 

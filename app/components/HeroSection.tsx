@@ -13,10 +13,10 @@ const STEP_MS = 3000; // one clock for text + images
 export default function HeroSection({ onBgColorChange }: HeroSectionProps) {
   const heroBackgrounds = useMemo(
     () => [
-      { bgColor: "#e0ce8a", image: "/dogs/1.svg", alt: "Golden retriever", heading: "furvourite" },
-      { bgColor: "#9acbda", image: "/dogs/2.svg", alt: "Playful husky", heading: "meowelous" },
-      { bgColor: "#e3b3c3", image: "/dogs/3.svg", alt: "Cute cat", heading: "purrfect" },
-      { bgColor: "#98cbbc", image: "/dogs/4.svg", alt: "Tuxedo cat", heading: "pawsome" },
+      { bgColor: "#e0ce8a", image: "/dogs/d1.avif", alt: "Golden retriever", heading: "furvourite" },
+      { bgColor: "#9acbda", image: "/dogs/d2.avif", alt: "Playful husky", heading: "meowelous" },
+      { bgColor: "#e3b3c3", image: "/dogs/d3.avif", alt: "Cute cat", heading: "purrfect" },
+      { bgColor: "#98cbbc", image: "/dogs/d4.avif", alt: "Tuxedo cat", heading: "pawsome" },
     ],
     []
   );
