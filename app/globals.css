@@ -136,3 +136,34 @@ input,textarea,[contenteditable="true"]{ cursor: text !important; }
 
 /* Clip overflowing absolutely-positioned ornaments */
 .section-clip-overflow{ overflow-x: clip; } /* add to wrappers with stickers near edges */
+
+/* ---- Mobile right-bleed fixes ---- */
+
+/* 1) Clip overflow on common wrappers (won't affect vertical scrolling) */
+header, section, footer,
+.container, .wrapper, .viewport,
+.hero, .nav, .page, .section-clip-overflow {
+  overflow-x: clip; /* stronger than hidden for transforms */
+  position: relative; /* keeps absolutely-positioned ornaments contained */
+}
+
+/* 2) Prevent 100vw/w-screen inside padded parents from causing horizontal scroll */
+[class*="w-screen"], [style*="100vw"] {
+  width: 100% !important;
+}
+
+/* 3) Make media elements never overflow */
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 4) Defensive: any absolutely-positioned 'sticker' won't push layout */
+.sticker, .sticker-float, .sticker-bob {
+  max-width: 100%;
+  contain: layout paint; /* isolates their box for layout/paint */
+}
+
+/* 5) iOS overscroll rubber-band shouldn't pull hidden overflow back in */
+body { overscroll-behavior-x: none; }

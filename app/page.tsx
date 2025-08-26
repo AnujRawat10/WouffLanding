@@ -4,11 +4,11 @@ import { useState } from "react"
 import Navigation from "./components/Navigation"
 import HeroSection from "./components/HeroSection"
 import HowItWorksSection from "./components/HowItWorksSection";
-import GameLauncher from "@/app/components/GameLauncher";
+// import GameLauncher from "@/app/components/GameLauncher";
 import ServicesSection from "./components/ServicesSection"
 import ProductsForPets from "./components/ProductsForPets";
 import TestimonialsSection from "./components/TestimonialsSection"
-import BeforeAfter from "@/app/components/BeforeAfter";
+// import BeforeAfter from "@/app/components/BeforeAfter";
 import InstaPlayingCardsLite from "@/app/components/InstaPlayingCards";
 import FAQSection from "./components/FAQSection"
 import ContactSection from "./components/ContactSection"
