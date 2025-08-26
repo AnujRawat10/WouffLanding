@@ -167,3 +167,26 @@ img, svg, video, canvas {
 
 /* 5) iOS overscroll rubber-band shouldn't pull hidden overflow back in */
 body { overscroll-behavior-x: none; }
+
+
+/* Hard-stop horizontal bleed at the app root and common wrappers */
+:where(html, body, #__next) { width:100%; max-width:100%; overflow-x: clip; }
+
+:where(header, main, section, footer,
+       .container, .wrapper, .viewport,
+       .page, .nav, .section-clip-overflow) {
+  position: relative;
+  overflow-x: clip;
+}
+
+/* Neutralize w-screen / 100vw inside padded parents (common bleed cause) */
+[class*="w-screen"], [style*="100vw"] { width: 100% !important; }
+
+/* Media never exceeds containers */
+img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
+
+/* Absolutely-positioned ornaments can’t expand layout */
+.sticker, .sticker-float, .sticker-bob { max-width: 100%; contain: layout paint; }
+
+/* iOS rubber-band shouldn’t bring back hidden overflow */
+body { overscroll-behavior-x: none; }
