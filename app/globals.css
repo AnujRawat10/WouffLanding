@@ -148,7 +148,7 @@ header, section, footer,
 }
 
 /* 2) Prevent 100vw/w-screen inside padded parents from causing horizontal scroll */
-[class*="w-screen"], [style*="100vw"] {
+[class*="w-full"], [style*="100vw"] {
   width: 100% !important;
 }
 
@@ -180,7 +180,7 @@ body { overscroll-behavior-x: none; }
 }
 
 /* Neutralize w-screen / 100vw inside padded parents (common bleed cause) */
-[class*="w-screen"], [style*="100vw"] { width: 100% !important; }
+[class*="w-full"], [style*="100vw"] { width: 100% !important; }
 
 /* Media never exceeds containers */
 img, svg, video, canvas { max-width: 100%; height: auto; display: block; }

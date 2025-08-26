@@ -21,7 +21,7 @@ type Props = {
 
 export default function InstaPlayingCardsLite({
   heading = "Our Social Media",
-  subtitle = "Real results from our community.",
+//   subtitle = "Real results from our community.",
   profileUrl = "https://www.instagram.com/thewouff/",
   items = [],
 }: Props) {
@@ -44,11 +44,11 @@ export default function InstaPlayingCardsLite({
             <span style={{ color: "#98cbbc" }}>Media</span>
           </h2>
 
-          {subtitle ? (
+          {/* {subtitle ? (
             <p className="mt-1 text-[clamp(14px,3.8vw,16px)] text-gray-600">
               {subtitle}
             </p>
-          ) : null}
+          ) : null} */}
         </div>
 
         {/* Playing-card grid */}
