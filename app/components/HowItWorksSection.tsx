@@ -6,27 +6,20 @@ import { CalendarCheck, Scissors, Smile, ArrowRight, Star } from "lucide-react";
 type Badge = {
   src: string;
   alt: string;
-  /** "top-right" | "bottom-left" */
   pos: "top-right" | "bottom-left";
 };
 
 type Props = {
   title?: string;
   subtitle?: string;
-  /** MP4/WEBM path in /public */
   videoSrc: string;
-  /** Fallback poster image (shows before play/autoplay) */
   poster?: string;
-  /** Two small decorative images like your mock */
   badges?: Badge[];
-  /** Overlay copy on top of the video */
   overlayTitle?: string;
   overlayCopy?: string;
-  /** CTA props */
   bookLabel?: string;
   onBookNow?: () => void;
-  /** Rating props */
-  ratingText?: string; // e.g. "+456 Happy Pets"
+  ratingText?: string;
   showOverlay?: boolean;
 };
 
@@ -60,13 +53,11 @@ export default function HowItWorksSection({
         {/* Media card */}
         <div className="relative mx-auto mt-8 sm:mt-10 w-full">
           <div className="relative mx-auto overflow-hidden rounded-[24px] sm:rounded-[32px] lg:rounded-[40px] shadow-xl ring-1 ring-black/5">
-            {/* Keep 16:9 on desktop, slightly taller on mobile for presence */}
             <div className="aspect-[16/10] sm:aspect-[16/9]">
               <video
                 className="h-full w-full object-cover"
                 src={videoSrc}
                 poster={poster}
-                // iOS & Chrome autoplay requirements
                 autoPlay
                 muted
                 loop
@@ -75,57 +66,56 @@ export default function HowItWorksSection({
               />
             </div>
 
-            {/* Subtle gradient for legibility */}
             {showOverlay && (
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/45 via-transparent to-transparent" />
+              <>
+                {/* Subtle gradient */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/45 via-transparent to-transparent" />
+
+                {/* Text + CTA */}
+                <div className="absolute left-4 bottom-4 sm:left-6 sm:bottom-6 lg:left-8 lg:bottom-8 z-20 max-w-[34ch]">
+                  <h3
+                    className="whitespace-pre-line text-white font-extrabold leading-tight
+                               drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]
+                               text-3xl sm:text-4xl lg:text-5xl"
+                  >
+                    {overlayTitle}
+                  </h3>
+                  <p className="mt-3 text-white/90 text-sm sm:text-base drop-shadow-[0_1px_6px_rgba(0,0,0,0.35)]">
+                    {overlayCopy}
+                  </p>
+                  <button
+                    onClick={onBookNow}
+                    className="pointer-events-auto mt-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2
+                               text-sm font-semibold text-gray-900 shadow hover:bg-white transition"
+                    aria-label={bookLabel}
+                  >
+                    {bookLabel}
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                </div>
+
+                {/* Rating */}
+                <div className="absolute right-4 bottom-4 sm:right-6 sm:bottom-6 lg:right-8 lg:bottom-8 z-20 flex items-center gap-2 text-white/95">
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <Star key={i} className="h-4 w-4 fill-current text-white" />
+                  ))}
+                  <span className="text-xs sm:text-sm">{ratingText}</span>
+                </div>
+              </>
             )}
 
-            {/* Text + CTA overlay */}
-            {showOverlay && (
-              <div className="absolute left-4 bottom-4 sm:left-6 sm:bottom-6 lg:left-8 lg:bottom-8 z-20 max-w-[34ch]">
-                <h3
-                  className="whitespace-pre-line text-white font-extrabold leading-tight
-                             drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]
-                             text-3xl sm:text-4xl lg:text-5xl"
-                >
-                  {overlayTitle}
-                </h3>
-                <p className="mt-3 text-white/90 text-sm sm:text-base drop-shadow-[0_1px_6px_rgba(0,0,0,0.35)]">
-                  {overlayCopy}
-                </p>
-                <button
-                  onClick={onBookNow}
-                  className="pointer-events-auto mt-4 inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2
-                             text-sm font-semibold text-gray-900 shadow hover:bg-white transition"
-                  aria-label={bookLabel}
-                >
-                  {bookLabel}
-                  <ArrowRight className="h-4 w-4" />
-                </button>
-              </div>
-            )}
-
-            {/* Rating (5 stars) */}
-            {showOverlay && (
-              <div className="absolute right-4 bottom-4 sm:right-6 sm:bottom-6 lg:right-8 lg:bottom-8 z-20 flex items-center gap-2 text-white/95">
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <Star key={i} className="h-4 w-4 fill-current text-white" />
-                ))}
-                <span className="text-xs sm:text-sm">{ratingText}</span>
-              </div>
-            )}
-
-            {/* Badges (kept as in your original) */}
+            {/* Badges */}
             {badges.map((b, i) => {
-              const isTR = b.pos === "top-right";
-              const base =
-                "absolute z-30 overflow-hidden rounded-2xl shadow-xl ring-4 ring-white/70 bg-white";
-              const posCls = isTR
-                ? "right-3 top-3 sm:right-4 sm:top-4"
-                : "left-3 -bottom-8 sm:left-4 sm:-bottom-10";
+              const posCls =
+                b.pos === "top-right"
+                  ? "right-3 top-3 sm:right-4 sm:top-4"
+                  : "left-3 -bottom-8 sm:left-4 sm:-bottom-10";
               const sizeCls = "h-16 w-16 sm:h-20 sm:w-20";
               return (
-                <div key={i} className={`${base} ${posCls}`}>
+                <div
+                  key={i}
+                  className={`absolute z-30 overflow-hidden rounded-2xl shadow-xl ring-4 ring-white/70 bg-white ${posCls}`}
+                >
                   <Image
                     src={b.src}
                     alt={b.alt}
@@ -140,7 +130,7 @@ export default function HowItWorksSection({
           </div>
         </div>
 
-        {/* 3 simple steps (unchanged) */}
+        {/* 3 simple steps */}
         <ol className="mx-auto mt-10 grid max-w-5xl grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-3">
           <li className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-black/5">
             <div className="flex items-center gap-3">
@@ -162,7 +152,7 @@ export default function HowItWorksSection({
               <p className="font-semibold text-gray-900">Play</p>
             </div>
             <p className="mt-2 text-sm text-gray-600">
-              Keep 'em happy and engaged with our fun and durable toys.
+              Keep them happy and engaged with our fun and durable toys.
             </p>
           </li>
 
