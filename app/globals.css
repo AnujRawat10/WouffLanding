@@ -1,234 +1,138 @@
 @import "tailwindcss";
 
+/* ========== Design tokens ========== */
+:root{
+  --background:#ffffff;
+  --foreground:#171717;
+  --pink-soft:#e3b3c3;
+  --blue-soft:#9acbda;
+  --yellow-soft:#e0ce8a;
+  --purple-soft:#a8c8ec;
+  --green-soft:#98cbbc;
+  --orange-soft:#ffb366;
 
-/* ---- Brand colors (already in your file, keep if you like) ---- */
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --pink-soft: #e3b3c3;
-  --blue-soft: #9acbda;   /* header/hero sky */
-  --yellow-soft: #e0ce8a;
-  --purple-soft: #a8c8ec;
-  --green-soft: #98cbbc;
-  --orange-soft: #ffb366;
+  /* 🐾 Inline 32x32 transparent paw PNG so it can't 404 */
+  --paw:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAClklEQVR4Ae2WzUoDQRDG/3cK1LWCtYzQy6I9EokUQ8YqK4FKyMnaO+gbZ2htqEUIidjVbRE7Cq0KW1tRS7hNfLx73p2Z2Zw9y3hzznffM2d+YACaWYwMIIkmmE28hTqq2z2MI8M3CsCFlNtxuhjE7AgOD1FiqNcEVx7js9tsjKmP81t5EMMgHeMBweVhcdztZ7X9b3KsPjzgDr2kx0cxiweB9xiNzEYdvwCEiBByzJsFRB2cgggZh4dbyKfViST4HeHRiTYDCk3V5FrK6dAE6YO02Yap5trtSTYWkT27E5Qdqxlc4c+0hch8k9+EYpXrZfB5qF9Fq4q48A4ewKR7SU9+v/d5sy1h84LM5hxcsO7UXYv1l9lZEtG9z2rXw6pL2V7cDVq/lx2QfYAA8Ym1sw3fKkw4rYydhV8kCB+rmP3WyOQ3uf0D0cOdANxgeixqWUT3I+yWJZp2BoEkt50sK+7YyUL6Y7oAtxV5J8MZ9i+JTdXcRz0Z7wZrWZZ4X9xtDMBPgNj8EQDIDoZb6mfhLgLgGHQUzzWTclMBsDDCv+ohmP7oAE6XZuZEl6B5L5Mk5u5riA2CjAgqSCMNNV2hMTW+ExXNeQ+b9FqxxKwAAAABJRU5ErkJggg==") 16 16;
 }
 
-/* ---- Global font: Sora everywhere ---- */
-html, body, * {
-  font-family: var(--font-sora), system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", sans-serif !important;
-  letter-spacing: 0; /* tight like the reference */
+/* Dark mode tokens */
+@media (prefers-color-scheme: dark){
+  :root{ --background:#0a0a0a; --foreground:#ededed; }
 }
 
-/* Keep the rest of your existing globals below */
-body {
-  background: var(--background);
-  color: var(--foreground);
-  scroll-behavior: smooth;
+/* ========== Base ========== */
+*,
+*::before,
+*::after{ box-sizing:border-box; }
+
+html{
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  scroll-behavior:smooth;
 }
 
-/* Optional: crisper type like the reference */
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html,body,*{
+  font-family:var(--font-sora),system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Helvetica Neue",sans-serif !important;
+  letter-spacing:0;
 }
 
-/* ...keep your utilities/animations from the existing file... */
-
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body{
+  background:var(--background);
+  color:var(--foreground);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
-  scroll-behavior: smooth;
+/* Prevent horizontal page shift on mobile */
+html, body { max-width:100%; overflow-x:hidden; }
+
+/* ========== Utilities (kept) ========== */
+.glass-effect{
+  background:rgba(255,255,255,.1);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.2);
 }
 
-/* Glass Effect Utility */
-.glass-effect {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+.btn-primary{
+  background:rgba(255,255,255,.9);
+  color:#374151;
+  padding:.75rem 1.5rem;
+  border-radius:9999px;
+  font-weight:600;
+  transition:all .3s ease;
+  transform:scale(1);
+  backdrop-filter:blur(4px);
+  border:1px solid rgba(255,255,255,.3);
+}
+.btn-primary:hover{
+  background:#fff;
+  box-shadow:0 25px 50px -12px rgba(0,0,0,.25);
+  transform:scale(1.05);
 }
 
-/* Button Utility */
-.btn-primary {
-  background: rgba(255, 255, 255, 0.9);
-  color: #374151;
-  padding: 0.75rem 1.5rem;
-  border-radius: 9999px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  transform: scale(1);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
+/* Animations */
+@keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-20px) rotate(5deg)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes bounce-slow{0%,20%,53%,80%,100%{transform:translate3d(0,0,0)}40%,43%{transform:translate3d(0,-30px,0)}70%{transform:translate3d(0,-15px,0)}90%{transform:translate3d(0,-4px,0)}}
 
-.btn-primary:hover {
-  background: #ffffff;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  transform: scale(1.05);
-}
-
-/* Custom animations */
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(5deg);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes bounce-slow {
-  0%,
-  20%,
-  53%,
-  80%,
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-  40%,
-  43% {
-    transform: translate3d(0, -30px, 0);
-  }
-  70% {
-    transform: translate3d(0, -15px, 0);
-  }
-  90% {
-    transform: translate3d(0, -4px, 0);
-  }
-}
-
-.float-animation {
-  animation: float 6s ease-in-out infinite;
-}
-
-.float-animation:nth-child(2) {
-  animation-delay: 1s;
-}
-
-.float-animation:nth-child(3) {
-  animation-delay: 2s;
-}
-
-.float-animation:nth-child(4) {
-  animation-delay: 3s;
-}
-
-.animate-slide-up {
-  animation: slideUp 0.8s ease-out;
-}
-
-.animate-fade-in {
-  animation: fadeIn 1s ease-out;
-}
-
-.animate-bounce-slow {
-  animation: bounce-slow 2s infinite;
-}
+.float-animation{animation:float 6s ease-in-out infinite}
+.float-animation:nth-child(2){animation-delay:1s}
+.float-animation:nth-child(3){animation-delay:2s}
+.float-animation:nth-child(4){animation-delay:3s}
+.animate-slide-up{animation:slideUp .8s ease-out}
+.animate-fade-in{animation:fadeIn 1s ease-out}
+.animate-bounce-slow{animation:bounce-slow 2s infinite}
 
 /* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:rgba(0,0,0,.1);border-radius:4px}
+::-webkit-scrollbar-thumb{background:rgba(0,0,0,.3);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.5)}
 
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-}
+/* Responsive hero text */
+@media (max-width:768px){.hero-text{font-size:clamp(3rem,8vw,5rem)}}
+@media (min-width:769px){.hero-text{font-size:clamp(5rem,10vw,8rem)}}
 
-::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.5);
-}
-
-/* Responsive text scaling */
-@media (max-width: 768px) {
-  .hero-text {
-    font-size: clamp(3rem, 8vw, 5rem);
-  }
-}
-
-@media (min-width: 769px) {
-  .hero-text {
-    font-size: clamp(5rem, 10vw, 8rem);
-  }
-}
-
-/* Improved focus states for accessibility */
+/* Focus */
 button:focus-visible,
-a:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.8);
-  outline-offset: 2px;
+a:focus-visible{outline:2px solid rgba(255,255,255,.8);outline-offset:2px}
+
+/* Smooth transitions */
+button,a,input,textarea{transition:all .3s ease}
+
+/* Word slide */
+@keyframes hero-word{
+  0%{opacity:0;transform:translateY(18px)}
+  18%{opacity:1;transform:translateY(0)}
+  82%{opacity:1;transform:translateY(0)}
+  100%{opacity:.98;transform:translateY(-10px)}
+}
+.animate-hero-word{
+  animation-name:hero-word;
+  animation-timing-function:ease-in-out;
+  animation-fill-mode:both;
 }
 
-/* Smooth transitions for all interactive elements */
-button,
-a,
-input,
-textarea {
-  transition: all 0.3s ease;
-}
-/* word slide, desktop+mobile */
-@keyframes hero-word {
-  0%   { opacity: 0; transform: translateY(18px); }
-  18%  { opacity: 1; transform: translateY(0); }
-  82%  { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0.98; transform: translateY(-10px); }
-}
-.animate-hero-word {
-  animation-name: hero-word;
-  animation-timing-function: ease-in-out;
-  animation-fill-mode: both;
-}
 /* Hide horizontal scrollbar but keep scrolling */
-.no-scrollbar {
-  -ms-overflow-style: none;  /* IE/Edge */
-  scrollbar-width: none;     /* Firefox */
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none;             /* Chrome/Safari */
-}
+.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+.no-scrollbar::-webkit-scrollbar{display:none}
 
-/* === sticker animations (scoped by class names) === */
-@keyframes sticker-float {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-6px); }
-}
-@keyframes sticker-bob {
-  0%, 100% { transform: rotate(12deg) translateY(0); }
-  50%      { transform: rotate(14deg) translateY(-4px); }
-}
-.sticker-float { animation: sticker-float 5s ease-in-out infinite; }
-.sticker-bob   { animation: sticker-bob   6s ease-in-out infinite; }
+/* Stickers */
+@keyframes sticker-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes sticker-bob{0%,100%{transform:rotate(12deg) translateY(0)}50%{transform:rotate(14deg) translateY(-4px)}}
+.sticker-float{animation:sticker-float 5s ease-in-out infinite}
+.sticker-bob{animation:sticker-bob 6s ease-in-out infinite}
+
+/* ========== Global Paw Cursor (keep last so it wins) ========== */
+/* default everywhere (desktop browsers) */
+html,body{ cursor: var(--paw), auto !important; }
+/* interactive elements keep pointer behavior but show paw */
+a,button,[role="button"],.cursor-pointer{ cursor: var(--paw), pointer !important; }
+/* keep I-beam where typing is needed */
+input,textarea,[contenteditable="true"]{ cursor: text !important; }
+
+/* Utility to force paw grab for custom carousels if needed */
+.paw-cursor{ cursor: var(--paw), grab !important; }
+.paw-cursor:active{ cursor: var(--paw), grabbing !important; }
+
+/* Clip overflowing absolutely-positioned ornaments */
+.section-clip-overflow{ overflow-x: clip; } /* add to wrappers with stickers near edges */

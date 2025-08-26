@@ -147,10 +147,10 @@ export default function HowItWorksSection({
               <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100">
                 <CalendarCheck className="h-5 w-5 text-emerald-700" />
               </span>
-              <p className="font-semibold text-gray-900">Book</p>
+              <p className="font-semibold text-gray-900">Nourish</p>
             </div>
             <p className="mt-2 text-sm text-gray-600">
-              Pick a slot that works for you—home pickup or in-store.
+              Give your pet the best with our premium food and supplements.
             </p>
           </li>
 
@@ -159,10 +159,10 @@ export default function HowItWorksSection({
               <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-sky-100">
                 <Scissors className="h-5 w-5 text-sky-700" />
               </span>
-              <p className="font-semibold text-gray-900">Groom</p>
+              <p className="font-semibold text-gray-900">Play</p>
             </div>
             <p className="mt-2 text-sm text-gray-600">
-              Gentle bath, blow-dry, trim, and a little spa love.
+              Keep 'em happy and engaged with our fun and durable toys.
             </p>
           </li>
 
@@ -171,10 +171,10 @@ export default function HowItWorksSection({
               <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-amber-100">
                 <Smile className="h-5 w-5 text-amber-700" />
               </span>
-              <p className="font-semibold text-gray-900">Smile</p>
+              <p className="font-semibold text-gray-900">Pamper</p>
             </div>
             <p className="mt-2 text-sm text-gray-600">
-              Fresh, fluffy, happy—share the glam shot with the fam!
+              Treat your furry friend to our luxurious and gentle care products.
             </p>
           </li>
         </ol>

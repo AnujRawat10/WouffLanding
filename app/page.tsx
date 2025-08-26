@@ -9,6 +9,7 @@ import ServicesSection from "./components/ServicesSection"
 import ProductsForPets from "./components/ProductsForPets";
 import TestimonialsSection from "./components/TestimonialsSection"
 import BeforeAfter from "@/app/components/BeforeAfter";
+import InstaPlayingCardsLite from "@/app/components/InstaPlayingCards";
 import FAQSection from "./components/FAQSection"
 import ContactSection from "./components/ContactSection"
 import Footer from "./components/Footer"
@@ -25,7 +26,7 @@ export default function Home() {
       
       <HowItWorksSection
         videoSrc="/howitworks/grooming.mp4"
-        poster="/howitworks/poster.jpg"
+        // poster="/howitworks/poster.jpg"
         badges={[
           { src: "/howitworks/badge1.webp", alt: "Grooming products", pos: "top-right" },
           
@@ -49,7 +50,19 @@ export default function Home() {
         viewAllHref="/shop"
         onAddToCart={(p) => console.log("Add to cart:", p)}
       />
-
+      
+      <InstaPlayingCardsLite
+      
+  heading="Our Social Media"
+  subtitle="Real results from our community."
+  profileUrl="https://www.instagram.com/thewouff/"
+  items={[
+    { id: "ig1", title: "Yorkie Bath Routine", poster: "/insta/1.jpg", shortcode: "DNlEjNUvF-b", angle: -14, badge: "New" },
+    { id: "ig2", title: "Nail Grinding 101",  poster: "/insta/2.jpg", shortcode: "DNr_aJz3jh9", angle: 10,  badge: "Guide" },
+    { id: "ig3", title: "Salon-level De-shedding", poster: "/insta/3.jpg", shortcode: "DMxbqlXvErq", angle: -6,  badge: "Tip" },
+   
+  ]}
+/>
 
       <TestimonialsSection />
       {/* <BeforeAfter />

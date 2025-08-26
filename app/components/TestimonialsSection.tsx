@@ -87,13 +87,16 @@ export default function TestimonialsSection() {
         {/* Header — compact and screen-friendly */}
         <div className="mb-8 md:mb-10 max-w-3xl">
           <h2
-            className="
-              lowercase font-semibold tracking-tight text-gray-900 leading-tight
-              text-[clamp(28px,6.2vw,56px)]
-            "
-          >
-            trusted by humans, loved by pets
-          </h2>
+  className="
+    lowercase font-semibold tracking-tight leading-tight
+    text-[clamp(28px,6.2vw,56px)]
+    text-gray-900
+  "
+>
+  trusted by <span style={{ color: "#9acbda" }}>humans</span>, loved by{" "}
+  <span style={{ color: "#e3b3c3" }}>pets</span>
+</h2>
+
           <p className="mt-3 text-[clamp(14px,2.2vw,18px)] text-gray-900/80">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros
             elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut
