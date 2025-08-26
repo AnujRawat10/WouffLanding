@@ -63,10 +63,8 @@ export default function ProductsForPets({
             id="products-title"
             className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl"
           >
-            Products for your{" "}
-            <span className="bg-[linear-gradient(transparent_70%,#f2c7f0_70%)]">
-              pets
-            </span>
+            Products for your pets
+            
           </h2>
 
           <div className="mt-8">

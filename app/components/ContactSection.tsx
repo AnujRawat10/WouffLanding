@@ -6,6 +6,7 @@ import { PawPrint, ChevronRight } from "lucide-react";
 type Props = {
   eyebrow?: string;
   heading?: string;
+  /** kept in the type for compatibility, but not used anymore */
   highlight?: string;
   subcopy?: string;
   heroImage: string;
@@ -20,8 +21,8 @@ type Props = {
 export default function ContactHero({
   eyebrow = "Wouff pet solutions",
   heading = "Your reliable partner for pet wellness",
-  highlight = "wellness",
-  subcopy = "At our clinic, we prioritize the health and happiness of your beloved pets. Our expert veterinarians are dedicated to providing love.",
+  // highlight is intentionally unused to remove special styling
+  subcopy = "In our products, we prioritize the health and happiness of your beloved pets. We are dedicated to providing love.",
   heroImage,
   heroAlt = "Happy pet and human",
   badgeImage,
@@ -30,8 +31,6 @@ export default function ContactHero({
   primaryHref = "#contact",
   secondaryHref = "#services",
 }: Props) {
-  const parts = heading.split(new RegExp(`(${escapeRegExp(highlight)})`, "i"));
-
   return (
     <section id="contact" className="bg-[#f4f4f4]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-20">
@@ -43,17 +42,9 @@ export default function ContactHero({
               <span>{eyebrow}</span>
             </div>
 
+            {/* Plain heading, no highlight */}
             <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight text-gray-900">
-              {parts.map((seg, i) =>
-                seg.toLowerCase() === highlight.toLowerCase() ? (
-                  <span key={i} className="relative inline-block">
-                    <span className="relative z-10">{seg}</span>
-                    <span className="absolute left-0 bottom-1 h-3 w-full rounded-full bg-fuchsia-300/70 -z-0" />
-                  </span>
-                ) : (
-                  <span key={i}> {seg} </span>
-                ),
-              )}
+              {heading}
             </h1>
 
             <p className="mt-5 max-w-xl text-gray-600">{subcopy}</p>
@@ -81,12 +72,12 @@ export default function ContactHero({
 
           {/* RIGHT */}
           <div className="lg:col-span-7">
-            {/* ⬇️ removed overflow-hidden here so the badge can hang outside without getting cut */}
+            {/* allow the badge to float outside without clipping */}
             <div
               className="relative rounded-[32px] p-3 sm:p-4"
               style={{ backgroundColor: panelBg }}
             >
-              {/* Big image (keeps overflow-hidden to respect rounding) */}
+              {/* Big image */}
               <div className="relative w-full aspect-[4/5] sm:aspect-[16/10] lg:aspect-[16/9] rounded-[28px] overflow-hidden">
                 <Image
                   src={heroImage}
@@ -98,7 +89,7 @@ export default function ContactHero({
                 />
               </div>
 
-              {/* Floating badge — z-20 to be sure it’s above the big photo */}
+              {/* Floating badge */}
               <div className="absolute -top-6 left-6 sm:-top-7 sm:left-7 z-20">
                 <div className="relative h-24 w-24 sm:h-28 sm:w-28 rounded-[20px] border-[6px] border-white shadow-xl overflow-hidden bg-white">
                   <Image
@@ -118,8 +109,4 @@ export default function ContactHero({
       </div>
     </section>
   );
-}
-
-function escapeRegExp(str: string) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
